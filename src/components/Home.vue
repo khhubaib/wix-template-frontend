@@ -1,38 +1,69 @@
 <script>
+import Expertise from './Expertise.vue';
+import FormComp from './FormComp.vue';
+import HeroComp from './HeroComp.vue';
+import HomeGrid from './HomeGrid.vue';
+import HomeGrid2 from './HomeGrid2.vue';
+import HomeGrid3 from './Homegrid3.vue';
+import Solutions from './Solutions.vue';
+
 export default{
   name: 'Home',
+
+  components:{
+    HeroComp,
+    Expertise,
+    HomeGrid,
+    HomeGrid2,
+    Solutions,
+    HomeGrid3,
+    FormComp,
+  },
+
+  data(){
+    return{
+      h1: 'OUR EXPERTISE',
+      span: 'About us',
+      h2: 'EFFICIENT WORKFLOW',
+      ptag: 'Our process involves a strategic blend of creativity and analytics to deliver tailored marketing solutions that drive results.',
+      span2: 'Our Process',
+
+      span3: 'Our Services',
+      h3: 'TAILORED MARKETING SOLUTIONS',
+
+      picture: 'form.jpeg',
+    }
+  }
 }
 </script>
 
 <template>
-  <div>
-    <div class="text-rotate" style="position: relative; height: 2.5rem;">
-  <span class="word" style="animation-delay: 0s;">Developer</span>
-  <span class="word" style="animation-delay: 2s;">Designer</span>
-  <span class="word" style="animation-delay: 4s;">Creator</span>
-</div>
+  <div class="home">
+   <hero-comp/>
+    <expertise
+    :h1="h1"
+    :span="span"
+    />
+    <home-grid/>
 
+    <expertise
+    :h1="h2"
+    :span="span2"
+    :ptag="ptag"
+    />
+
+    <home-grid2/>
+    <solutions
+    :span="span3"
+    :h1="h3"
+    />
+    <home-grid3/>
+    <form-comp
+    :picture="picture"
+    />
   </div>
 </template>
 
 <style>
-.text-rotate {
-  font-size: 2rem;
-  font-weight: bold;
-  font-family: monospace;
-  display: inline-block;
-}
 
-.text-rotate > .word {
-  display: inline-block;
-  opacity: 0;
-  animation: rotateWords 6s linear infinite 0s;
-  position: absolute;
-}
-
-@keyframes rotateWords {
-  0%, 20% { opacity: 0; transform: translateY(-20px); }
-  25%, 45% { opacity: 1; transform: translateY(0); }
-  50%, 100% { opacity: 0; transform: translateY(20px); }
-}
 </style>
