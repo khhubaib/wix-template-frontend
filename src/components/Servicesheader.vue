@@ -2,6 +2,7 @@
 export default {
   name: 'Servicesheader',
   mounted() {
+    // ICON ROTATION — keep your logic
     const plusIcons = document.querySelectorAll('.service-crad i');
 
     const rotateIcons = () => {
@@ -12,9 +13,27 @@ export default {
     };
 
     window.addEventListener('scroll', rotateIcons);
+    this._rotateIcons = rotateIcons;
 
-    this._rotateIcons = rotateIcons; // store reference for removal
+
+    // ANIMATION ON SCROLL — new logic
+    const cards = document.querySelectorAll('.service-crad');
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-now');
+            observer.unobserve(entry.target); // prevent re-trigger
+          }
+        });
+      },
+      { threshold: 0.5 } // triggers when 20% visible
+    );
+
+    cards.forEach(card => observer.observe(card));
   },
+
   beforeUnmount() {
     window.removeEventListener('scroll', this._rotateIcons);
   }
@@ -32,7 +51,7 @@ export default {
 
   <div class="services-bottom">
     <div class="services-inner">
-      <div class="service-crad">
+      <div class="service-crad from-left enter-animation">
         <div class="icon-wrapper">
           <i class="fa-solid fa-plus"></i>
         </div>
@@ -45,7 +64,7 @@ export default {
         </div>
       </div>
 
-      <div class="service-crad">
+      <div class="service-crad from-right enter-animation">
         <div class="icon-wrapper">
           <i class="fa-solid fa-plus"></i>
         </div>
@@ -55,7 +74,7 @@ export default {
         </div>
       </div>
 
-      <div class="service-crad">
+      <div class="service-crad from-left enter-animation">
         <div class="icon-wrapper">
           <i class="fa-solid fa-plus"></i>
         </div>
@@ -65,7 +84,7 @@ export default {
         </div>
       </div>
 
-      <div class="service-crad">
+      <div class="service-crad from-right enter-animation">
         <div class="icon-wrapper">
           <i class="fa-solid fa-plus"></i>
         </div>
@@ -215,4 +234,35 @@ export default {
         height: 15.5rem;
      }
 }
+
+
+/* Initial hidden state */
+/* hidden initial state */
+.enter-animation {
+  opacity: 0;
+}
+
+/* animation gets applied only when visible */
+.animate-now {
+  animation: slideIn 2s ease forwards;
+}
+
+
+/* Alternating directions */
+.from-left {
+  transform: translateX(-120px);
+}
+
+.from-right {
+  transform: translateX(120px);
+}
+
+/* Animation keyframes */
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 </style>

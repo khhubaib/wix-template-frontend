@@ -98,12 +98,16 @@ body{
 
 /* Mobile Menu */
 .mobile-menu {
-  display: flex;
+  display: none;
   flex-direction: column;
   background: #f0f0f0;
   padding: 15px;
-  margin-top: 5px;
+  margin-top: 10px;
   border-radius: 10px;
+  position: absolute;
+  z-index: 800;
+  left: 16px;
+  right: 16px;
 }
 
 .mobile-menu a {
@@ -112,12 +116,17 @@ body{
   color: black;
   font-size: 20px;
   z-index: 10;
+  font-size: 1rem;
 }
 
 /* Responsive rules */
 @media (max-width: 850px) {
   .navbar-right {
     display: none;
+  }
+
+  .mobile-menu{
+    display: flex;
   }
 
   .ham-burger-icon {
@@ -135,6 +144,7 @@ body{
     overflow: hidden;
     border-radius: 15px;
     position: relative;
+    background-color: black;
     
 }
 
@@ -149,7 +159,7 @@ body{
 .hero-overlay {
     position: absolute;
     width: 40%;
-    height: 80%;
+    height: 90%;
     z-index: 5;
     display: flex;
     flex-direction: column;
@@ -171,7 +181,7 @@ body{
 }
 
 .overlay-top p{
-    font-size: clamp(10px, 2vw, 20px);
+    font-size: clamp(5px, 1vw, 20px);
 }
 
 
@@ -237,7 +247,7 @@ font-size: clamp(10px, 2vw, 20px);
     .hero-overlay{
       left: 10%;
       width: 80%;
-      height: 60%;
+      height: 80%;
     }
 
 }
@@ -871,9 +881,10 @@ row-gap: 10px;
         font-size: 15px;
     }
     .hero-overlay-about {
+        top: 2%;
         left: 10%;
         width: 80%;
-        height: 75%;
+        height: 95%;
     }
 
 }
